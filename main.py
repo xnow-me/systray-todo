@@ -34,7 +34,10 @@ def addTodoAction(ti, key, msg):
     ti.menu.addAction(ti.__getattribute__(key))
 
 def addTodos(ti):
-    with open(PWD + "/todo.list", 'r') as f:
+    filename = PWD + "/todo.list"
+    if not os.path.isfile(filename):
+        os.system(f"touch {filename}")
+    with open(filename, 'r') as f:
         for i, msg in enumerate(f):
             key = 'i' + str(i)
             addTodoAction(ti, key, msg)
